@@ -14,10 +14,5 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-        <groupId>com.github.axet</groupId>
-        <artifactId>vget</artifactId>
-        <version>1.1.33</version>
-      </dependency>
   </dependencies>
 </project>

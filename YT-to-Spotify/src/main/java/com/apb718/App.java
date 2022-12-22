@@ -5,9 +5,6 @@ import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.File;
-import java.net.URL;
-import com.github.axet.vget.VGet;
 
 
 class Main {
@@ -54,7 +51,7 @@ class Main {
                 //View Spotify Save Location
                 // System.out.println("You chose 2");
                 clearScreen();
-                System.out.println("Spotify Location: \"" + getSpotifyLocation() + "\"");
+                System.out.println("Spotify Location: \"" + getSpotifyLocation() + "\\OUTPUT_FILE.mp3");
                 System.out.println();
                 break;
             case 3:
@@ -80,14 +77,15 @@ class Main {
         System.out.print("Enter Youtube Video URL:");
         String url = getInput().trim();
         String path = getSpotifyLocation();
+
+        ProcessBuilder pb = new ProcessBuilder("YT-to-Spotify\\src\\youtube-dl.exe", "--extract-audio","--audio-format","mp3","-o",path + "\\%(title)s.mp3",url); 
         try {
-            VGet v = new VGet(new URL(url), new File(path));
-            System.out.println("Beginning Download");
-            v.download();
-            System.out.println("Download Complete");
+            Process p = pb.start();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: " + e);
         }
+            
+        
 
     }
 
