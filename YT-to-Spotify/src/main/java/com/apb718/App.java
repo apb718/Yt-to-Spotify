@@ -2,6 +2,9 @@ package com.apb718;
 
 import java.io.FileWriter;
 import java.util.Scanner;
+
+import javax.print.event.PrintJobListener;
+
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -80,7 +83,10 @@ class Main {
 
         ProcessBuilder pb = new ProcessBuilder("YT-to-Spotify\\src\\youtube-dl.exe", "--extract-audio","--audio-format","mp3","-o",path + "\\%(title)s.mp3",url); 
         try {
+            System.out.println("Downloading...");
             Process p = pb.start();
+            p.waitFor();
+            System.out.println("Download Complete");
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
